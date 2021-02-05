@@ -96,6 +96,20 @@ def post_google_translate():
         return "token error", 201
 
 
+#翻译Api-google
+@app.route('/telegrambot', methods=['POST'])
+def post_telegrambot():
+    token = request.form['token']
+    if token == '202014xyz':
+        import telebot
+        TOKEN = '1693960412:AAEzPGakWSuqShcacJDxE849etNu-NAdrsA'
+        tb = telebot.TeleBot(TOKEN)
+        text = request.form['text']
+        tb.send_message(808721783, text)
+        return '已发送消息', 201
+    else:
+        return "token error", 201
+
 
 #Request Api
 # @app.route('/request', methods=['POST'])
