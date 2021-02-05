@@ -169,7 +169,7 @@ from async_google_trans_new import google_translator
 
 async def coro(texts):
     # g = google_translator(url_suffix="com",timeout=25,proxies={'http':'159.75.5.165:10808','https': '159.75.5.165:10808',})
-    
+
     g = google_translator(url_suffix="cn")
     gathers = []
     for text in texts:
