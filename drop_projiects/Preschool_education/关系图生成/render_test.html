@@ -1,0 +1,141 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+<title>用户详细信息</title>
+ <style>
+body { margin-top: 3em; background: #eee; color: #555; font-family: "Open Sans", "Segoe UI", Helvetica, Arial, sans-serif; }
+p, p a { font-value: 12px;text-align: center; color: #888; }
+</style>
+    <script src="echarts-all.js"></script>
+    <script src="drawl.js"></script>
+   </head>
+  <body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+   <div style="padding:20px;width:100%;height:100%;"> 
+        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+               <div id="main" style="width: 1304px;height:764px;">
+               </div>
+ </div>
+  <!-- 进行ajax发送并接收数据,最后根据接收的数据完成可视化工作 -->
+  <script>
+  var myChart = echarts.init(document.getElementById('main'), 'macarons');
+  //创建Nodes
+  nodes=[
+                {category:0, name: '幼儿情绪', value : 10, label: '幼儿情绪\n（主要）'},
+                {category:1,name:'幼儿心理研究',value:7},
+                {category:1,name:'幼儿生理研究',value:7},
+                {category:1,name:'学校环境对幼儿情绪的影响',value:7},
+                {category:1,name:'家庭环境对幼儿情绪的影响',value:7},
+                {category:1,name:'教师对幼儿情绪的影响',value:7},
+                {category:1,name:'教学内容、教学方式对幼儿情绪的影响',value:7},
+                {category:1,name:'同学、伙伴对幼儿情绪的影响',value:7},
+                {category:1,name:'幼儿情绪研究',value:7},
+                {category:2,name:'情绪管理',value:4},
+                {category:2,name:'情绪调节',value:4},
+                {category:2,name:'情绪能力',value:4},
+                {category:2,name:'情绪智力',value:4},
+                {category:2,name:'心理健康',value:4},
+                {category:2,name:'情绪体验',value:4},
+                {category:2,name:'婴幼儿',value:4},
+                {category:2,name:'0-6岁的幼儿',value:4},
+                {category:2,name:'孩子',value:4},
+                {category:2,name:'小班幼儿',value:4},
+                {category:2,name:'幼儿园',value:4},
+                {category:2,name:'校园环境',value:4},
+                {category:2,name:'小班幼儿',value:4},
+                {category:2,name:'绘本',value:4},
+                {category:2,name:'游戏',value:4},
+                {category:2,name:'幼儿园环境',value:4},
+                {category:2,name:'家园共育',value:4},
+                {category:2,name:'家庭',value:4},
+                {category:2,name:'父母',value:4},
+                {category:2,name:'关爱',value:4},
+                {category:2,name:'家庭教育',value:4},
+                {category:2,name:'家园共育',value:4},
+                {category:2,name:'幼儿教师',value:4},
+                {category:2,name:'教师',value:4},
+                {category:2,name:'教育活动',value:4},
+                {category:2,name:'教育环境',value:4},
+                {category:2,name:'教育策略',value:4},
+                {category:2,name:'培养',value:4},
+                {category:2,name:'幼儿教育',value:4},
+                {category:2,name:'情绪教育',value:4},
+                {category:2,name:'策略',value:4},
+                {category:2,name:'绘本',value:4},
+                {category:2,name:'游戏',value:4},
+                {category:2,name:'小班幼儿',value:4},
+                {category:2,name:'同伴接纳',value:4},
+                {category:2,name:'不良情绪',value:4},
+                {category:2,name:'情绪理解',value:4},
+                {category:2,name:'负面情绪',value:4},
+                {category:2,name:'情绪反应',value:4},
+                {category:2,name:'幼儿情绪',value:4},
+                {category:2,name:'消极情绪',value:4},
+                {category:2,name:'积极情绪',value:4},
+                {category:2,name:'情绪情感',value:4},
+
+            ],
+    //创建links
+            links=[
+                {source:'幼儿情绪研究',target:'幼儿情绪',weight:3},
+                {source:'幼儿心理研究',target:'幼儿情绪',weight:2},
+                {source:'幼儿生理研究',target:'幼儿情绪',weight:2},
+                {source:'学校环境对幼儿情绪的影响',target:'幼儿情绪',weight:2},
+                {source:'家庭环境对幼儿情绪的影响',target:'幼儿情绪',weight:2},
+                {source:'教师对幼儿情绪的影响',target:'幼儿情绪',weight:2},
+                {source:'教学内容、教学方式对幼儿情绪的影响',target:'幼儿情绪',weight:2},
+                {source:'同学、伙伴对幼儿情绪的影响',target:'幼儿情绪',weight:2},
+
+
+
+                {source:'情绪管理',target:'幼儿心理研究',weight:2},
+                {source:'情绪调节',target:'幼儿心理研究',weight:2},
+                {source:'情绪能力',target:'幼儿心理研究',weight:2},
+                {source:'情绪智力',target:'幼儿心理研究',weight:2},
+                {source:'心理健康',target:'幼儿心理研究',weight:2},
+                {source:'情绪体验',target:'幼儿心理研究',weight:2},
+                {source:'婴幼儿',target:'幼儿生理研究',weight:2},
+                {source:'0-6岁的幼儿',target:'幼儿生理研究',weight:2},
+                {source:'孩子',target:'幼儿生理研究',weight:2},
+                {source:'小班幼儿',target:'幼儿生理研究',weight:2},
+                {source:'幼儿园',target:'学校环境对幼儿情绪的影响',weight:2},
+                {source:'校园环境',target:'学校环境对幼儿情绪的影响',weight:2},
+                {source:'小班幼儿',target:'学校环境对幼儿情绪的影响',weight:2},
+                {source:'绘本',target:'学校环境对幼儿情绪的影响',weight:2},
+                {source:'游戏',target:'学校环境对幼儿情绪的影响',weight:2},
+                {source:'幼儿园环境',target:'学校环境对幼儿情绪的影响',weight:2},
+                {source:'家园共育',target:'学校环境对幼儿情绪的影响',weight:2},
+                {source:'家庭',target:'家庭环境对幼儿情绪的影响',weight:2},
+                {source:'父母',target:'家庭环境对幼儿情绪的影响',weight:2},
+                {source:'关爱',target:'家庭环境对幼儿情绪的影响',weight:2},
+                {source:'家庭教育',target:'家庭环境对幼儿情绪的影响',weight:2},
+                {source:'家园共育',target:'家庭环境对幼儿情绪的影响',weight:2},
+                {source:'幼儿教师',target:'教师对幼儿情绪的影响',weight:2},
+                {source:'教师',target:'教师对幼儿情绪的影响',weight:2},
+                {source:'教育活动',target:'教学内容、教学方式对幼儿情绪的影响',weight:2},
+                {source:'教育环境',target:'教学内容、教学方式对幼儿情绪的影响',weight:2},
+                {source:'教育策略',target:'教学内容、教学方式对幼儿情绪的影响',weight:2},
+                {source:'培养',target:'教学内容、教学方式对幼儿情绪的影响',weight:2},
+                {source:'幼儿教育',target:'教学内容、教学方式对幼儿情绪的影响',weight:2},
+                {source:'情绪教育',target:'教学内容、教学方式对幼儿情绪的影响',weight:2},
+                {source:'策略',target:'教学内容、教学方式对幼儿情绪的影响',weight:2},
+                {source:'绘本',target:'教学内容、教学方式对幼儿情绪的影响',weight:2},
+                {source:'游戏',target:'教学内容、教学方式对幼儿情绪的影响',weight:2},
+                {source:'小班幼儿',target:'同学、伙伴对幼儿情绪的影响',weight:2},
+                {source:'同伴接纳',target:'同学、伙伴对幼儿情绪的影响',weight:2},
+                {source:'不良情绪',target:'幼儿情绪研究',weight:2},
+                {source:'情绪理解',target:'幼儿情绪研究',weight:2},
+                {source:'负面情绪',target:'幼儿情绪研究',weight:2},
+                {source:'情绪反应',target:'幼儿情绪研究',weight:2},
+                {source:'幼儿情绪',target:'幼儿情绪研究',weight:2},
+                {source:'消极情绪',target:'幼儿情绪研究',weight:2},
+                {source:'积极情绪',target:'幼儿情绪研究',weight:2},
+                {source:'情绪情感',target:'幼儿情绪研究',weight:2},
+            ]
+categoryArray=[{name:"核心"},{name:"关键分支"},{name:"节点"}]
+jsondata={"categories":categoryArray,"nodes":nodes,"links":links}  
+//数据格式为Json格式
+createGraph(myChart,jsondata)
+  </script>
+ </body>
+</html>

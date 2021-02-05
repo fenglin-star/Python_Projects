@@ -1,0 +1,7 @@
+googletrans==2.4.0
+requests==2.23.0
+selenium==3.141.0
+python_wordpress_xmlrpc==2.3
+Flask==1.1.2
+beautifulsoup4==4.9.1
+lxml
