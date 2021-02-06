@@ -1,10 +1,11 @@
 jieba==0.42.1
-PyMySQL==0.9.3
-Flask==1.1.2
-selenium==3.141.0
 google_trans_new==1.1.9
+Flask==1.1.2
+async_google_trans_new==1.1.2
+selenium==3.141.0
 python_wordpress_xmlrpc==2.3
-requests==2.22.0
 redis==3.4.1
+requests==2.22.0
+PyMySQL==0.9.3
 beautifulsoup4==4.9.3
-lxml
+pyTelegramBotAPI==3.7.6
