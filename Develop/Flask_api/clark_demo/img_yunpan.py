@@ -79,7 +79,7 @@ class img_up_self():
 
     #去重后再插入图片
     def set_img_up(self):
-        host = '127。0.0.1'
+        host = '127.0.0.1'
         port = 3306  # 端口号
         user = 'py_api'  # 用户名
         password = "LAhBfZW3RZtGdx3j"  # 密码
@@ -117,7 +117,7 @@ class img_up_self():
                     "weburl": sql_str(weburl),
                     "datatime": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())),
                 }
-                mysqlCommand.insertData(news_dict)
+                mysqlCommand.insertData(news_dict,key='url')
                 print("储存图片", weburl)
                 return weburl
 
@@ -188,5 +188,9 @@ if __name__ == '__main__':
 </div>
 </div>
     '''
-    img = img_up_self(url="", html=html)  # 调用类class
-    print(img.html_img_up())
+    # img = img_up_self(html=html)  # 调用类class
+    # print(img.html_img_up())
+
+
+    img = img_up_self(url='https://www.jingjiniao.info/data/attachment/block/df/dfe0f2ea98917339a0ed72fbb0f5ab3b.jpg')  # 调用类class
+    img.set_img_up()

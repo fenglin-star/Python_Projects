@@ -49,6 +49,8 @@ class MySQLCommand(object):
         res = self.cursor.execute(sqlExit)
         if int(res) > 0 :  # res为查询到的数据条数如果大于0就代表数据已经存在
             return 0
+        else:
+            return 1
 
 
     # 插入数据，插入之前先查询是否存在，如果存在就不再插入

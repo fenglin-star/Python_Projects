@@ -111,18 +111,6 @@ def post_telegrambot():
         return "token error", 201
 
 
-#Request Api
-# @app.route('/request', methods=['POST'])
-# def post_request():
-#     token = request.form['token']
-#     if token == '202014xyz':
-#         language = request.form['language']
-#         url = request.form['url']
-#         response = google_translate(language,source)
-#         return response, 201
-#     else:
-#         return "token error", 201
-
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1',port=5000,threaded=True)
