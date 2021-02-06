@@ -1,9 +1,8 @@
 #-*-coding: utf-8-*-
 # 创建时间: 2021/1/9
 
-import json,time
 from multiprocessing import Pool
-import requests
+import requests,json,time
 from requests.adapters import HTTPAdapter
 
 
