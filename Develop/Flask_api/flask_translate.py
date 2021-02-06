@@ -70,53 +70,59 @@ def base_html_translate(api_tpye,language, source):
 
 # 通过标签替换来翻译HTML
 def html_translate(api_tpye,language, source):
-    key = 'base_txt'
-    if len(source) > 20:
-        new_html = base_html_translate(api_tpye, language, source)
-        return new_html
+    new_html = base_html_translate(api_tpye, language, source)
+    return new_html
 
-    else:
-        host = '209.126.11.73'
-        port = 3306  # 端口号
-        user = 'py_translate'  # 用户名
-        password = "dn73iTWTbyhAPeBP"  # 密码
-        db = "py_translate"  # 库
-        table = language  # 表
-        charset = 'utf8'
 
-        # 连接数据库
-        mysqlCommand = MySQLCommand(host, port, user, password, db, table)
-        mysqlCommand.connectMysql()
-
-        def sql_str(data):
-            data = str(data).replace("'", "''").replace('"', '""')
-            return data
-
-        try:
-            # 插入数据，如果已经存在就不在重复插入
-            if_dict = {
-                "base_txt": sql_str(source),
-            }
-            if mysqlCommand.ifinsertData(if_dict,key) == 0:
-                url_lists = read_inquire_mysql(host, port, user, password, db, table, count=100, table_list=3,
-                                               inquire_id=["base_txt", str(source)])
-                repeat_txt = url_lists[0]
-                print("重复语句:",source)
-                return repeat_txt
-
-            else:
-                new_html = base_html_translate(api_tpye,language, source)
-                news_dict = {
-                    "datatime": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())),
-                    "base_txt": sql_str(source),
-                    "translate_txt": sql_str(new_html),
-                }
-                mysqlCommand.insertData(news_dict,key)
-                return new_html
-
-        except Exception as e:
-            print("数据错误", e)  # 输出插入失败的报错语句
-        mysqlCommand.closeMysql()  # 最后一定要要把数据关闭
+# 通过标签替换来翻译HTML
+# def html_translate(api_tpye,language, source):
+#     key = 'base_txt'
+#     if len(source) > 20:
+#         new_html = base_html_translate(api_tpye, language, source)
+#         return new_html
+#
+#     else:
+#         host = '209.126.11.73'
+#         port = 3306  # 端口号
+#         user = 'py_translate'  # 用户名
+#         password = "dn73iTWTbyhAPeBP"  # 密码
+#         db = "py_translate"  # 库
+#         table = language  # 表
+#         charset = 'utf8'
+#
+#         # 连接数据库
+#         mysqlCommand = MySQLCommand(host, port, user, password, db, table)
+#         mysqlCommand.connectMysql()
+#
+#         def sql_str(data):
+#             data = str(data).replace("'", "''").replace('"', '""')
+#             return data
+#
+#         try:
+#             # 插入数据，如果已经存在就不在重复插入
+#             if_dict = {
+#                 "base_txt": sql_str(source),
+#             }
+#             if mysqlCommand.ifinsertData(if_dict,key) == 0:
+#                 url_lists = read_inquire_mysql(host, port, user, password, db, table, count=100, table_list=3,
+#                                                inquire_id=["base_txt", str(source)])
+#                 repeat_txt = url_lists[0]
+#                 print("重复语句:",source)
+#                 return repeat_txt
+#
+#             else:
+#                 new_html = base_html_translate(api_tpye,language, source)
+#                 news_dict = {
+#                     "datatime": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())),
+#                     "base_txt": sql_str(source),
+#                     "translate_txt": sql_str(new_html),
+#                 }
+#                 mysqlCommand.insertData(news_dict,key)
+#                 return new_html
+#
+#         except Exception as e:
+#             print("数据错误", e)  # 输出插入失败的报错语句
+#         mysqlCommand.closeMysql()  # 最后一定要要把数据关闭
 
 
 
@@ -137,7 +143,9 @@ if __name__ == '__main__':
     data_str = '''Bus is too congested or there is no space, one way up to half an hour'''
 
     print(len(data_str))
-    print(google_translate(language="zh",source=data_str))
+    print(caiyun_translate(language="zh",source=data_str))
+
+    print(google_translate(language="zh", source=data_str))
     # print(caiyun_translate(language="en", source=data_str))
 
 

@@ -19,23 +19,35 @@ def translate_data(language,source):
             continue
 
 
+# def translate_list_data(language,source):
+#
+#     def list_to_str(source):
+#         # 解析list 转为flask能接受的str
+#         data = ''
+#         for i in source:
+#             data = data + '$$$$$$$' + i
+#         return data
+#
+#     def str_to_list(source):
+#         # 解析str，转换为list
+#         datas = source.replace("$$$$$$$", "", 1).split("$$$$$$$")
+#         return datas
+#
+#     translator = google_translator(url_suffix="com", timeout=25,proxies={'http': '159.75.5.165:10808','https': '159.75.5.165:10808',})
+#     en_list = str_to_list(translator.translate(list_to_str(source), lang_tgt=language))
+#
+#     return en_list
+
 def translate_list_data(language,source):
 
-    def list_to_str(source):
-        # 解析list 转为flask能接受的str
-        data = ''
-        for i in source:
-            data = data + '$$$$$' + i
-        return data
-
-    def str_to_list(source):
-        # 解析str，转换为list
-        datas = source.replace("$$$$$", "", 1).split("$$$$$")
-        return datas
+    #解析str，转换为list
+    datas = source
+    en_list = []
 
     translator = google_translator(url_suffix="com", timeout=25,proxies={'http': '159.75.5.165:10808','https': '159.75.5.165:10808',})
-    en_list = str_to_list(translator.translate(list_to_str(source), lang_tgt=language))
-
+    for i in datas:
+        translate_text = translator.translate(i,lang_tgt=language)
+        en_list.append(translate_text)
     return en_list
 
 
