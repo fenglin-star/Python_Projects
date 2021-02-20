@@ -62,7 +62,7 @@ def post_telegrambot(text):
 
 if __name__ == '__main__':
     success_num = 0
-    while success_num < 8:
+    while success_num < 6:
         try:
             proxies = {
                 "http": "socks5://127.0.0.2:20808",
@@ -77,6 +77,6 @@ if __name__ == '__main__':
             print("正在重试:",success_num, e)
             continue
 
-    if success_num > 3:
+    if success_num >= 3:
         title = 'V2ray存在问题'
         print(title,success_num, post_telegrambot(text=title))
