@@ -69,7 +69,7 @@ if __name__ == '__main__':
                 'https': 'socks5://127.0.0.2:10808'
             }
             res = requests_res("http://ip-api.com/json/?lang=zh-CN", proxies)
-            print(json.loads(res).get('query'), json.loads(res).get('country'), json.loads(res).get('regionName'))
+            print("正常状态：",json.loads(res).get('query'), json.loads(res).get('country'), json.loads(res).get('regionName'))
             break
 
         except Exception as e:
