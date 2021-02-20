@@ -65,8 +65,8 @@ if __name__ == '__main__':
     while success_num < 8:
         try:
             proxies = {
-                "http": "socks5://127.0.0.2:10808",
-                'https': 'socks5://127.0.0.2:10808'
+                "http": "socks5://127.0.0.2:20808",
+                'https': 'socks5://127.0.0.2:20808'
             }
             res = requests_res("http://ip-api.com/json/?lang=zh-CN", proxies)
             print("正常状态：",json.loads(res).get('query'), json.loads(res).get('country'), json.loads(res).get('regionName'))
