@@ -6,7 +6,6 @@ from requests.adapters import HTTPAdapter
 import json
 from multiprocessing import Pool
 
-
 list = []
 # 随机UserAgent
 fake_UserAgent = [
@@ -16,7 +15,6 @@ fake_UserAgent = [
     "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.2117.157 Safari/537.36",
     "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_6; zh-cn) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27",
 ]
-
 
 
 
@@ -30,7 +28,7 @@ def requests_res(url,proxies):
     s.mount('http://', HTTPAdapter(max_retries=2))
     s.mount('https://', HTTPAdapter(max_retries=2))
     response = s.get(url,headers=headers, proxies=proxies, timeout=15)
-    response .encoding = response .apparent_encoding
+    response.encoding = response.apparent_encoding
     html = response.text
     return html
 
@@ -59,6 +57,7 @@ def post_telegrambot(text):
             continue
 
 
+
 def get_dnspod_ip(domain,name):
     post_data = {
         "login_token": "216027,1406d367543fef1e471b78d894b379c2",
@@ -77,7 +76,6 @@ def get_dnspod_ip(domain,name):
         if i['name'] == name:
             print('域名{}：'.format(domain),i['name'],i['value'],'id为:',i['id'],'line为:',i['line'])
             return i['value']  #返回查询域名现在的解析ip
-
 
 
 
@@ -108,37 +106,17 @@ def modify_dnspod_ip(domain,record_id,sub_domain,value,record_type='CNAME'):
 
 if __name__ == '__main__':
 
-    success_num = 0
-    while success_num < 6:
-        try:
-            for i in range(0,5):
-                proxies = {
-                    "http": "socks5://127.0.0.2:20808",
-                    'https': 'socks5://127.0.0.2:20808'
-                }
-                res = requests_res("http://ip-api.com/json/?lang=zh-CN", proxies)
-                print("正常状态 {}：".format(i),json.loads(res).get('query'), json.loads(res).get('country'), json.loads(res).get('regionName'))
+    # domain='2021214.xyz'
+    # record_id='758263007'
+    # sub_domain='smart-node'
+    # value='node-cm.2021214.xyz'
+    # modify_dnspod_ip(domain,record_id, sub_domain, value, record_type='CNAME')
+    modify_dnspod_ip(domain='2021214.xyz', record_id='758263007', sub_domain='smart-node',
+                     value='node-cm.2021214.xyz', record_type='CNAME')
 
-            if get_dnspod_ip('2021214.xyz','smart-node')=='node-cm.2021214.xyz.':
-                print("正常状态，无需更改")
-            else:
-                modify_dnspod_ip(domain='2021214.xyz',record_id='758263007',sub_domain='smart-node',
-                                 value='node-cm.2021214.xyz',record_type='CNAME')
-                modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
-                                 value='node-cm.2021214.xyz', record_type='CNAME')
-            break
+    modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
+                     value='node-cm.2021214.xyz', record_type='CNAME')
 
-        except Exception as e:
-            success_num = success_num + 1
-            print("正在重试:",success_num, e)
-            continue
+    print(get_dnspod_ip('202014.xyz','node'))
 
-
-    if success_num >= 3:
-        title = 'V2ray存在问题'
-        print(title,success_num, post_telegrambot(text=title))
-        modify_dnspod_ip(domain='2021214.xyz', record_id='758263007', sub_domain='smart-node',
-                         value='node-hk.2021214.xyz', record_type='CNAME')
-
-        modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
-                         value='node-hk.2021214.xyz', record_type='CNAME')
+    print(get_dnspod_ip('2021214.xyz','smart-node'))
