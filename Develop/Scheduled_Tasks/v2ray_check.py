@@ -116,7 +116,7 @@ if __name__ == '__main__':
                     "http": "socks5://127.0.0.2:20808",
                     'https': 'socks5://127.0.0.2:20808'
                 }
-                res = requests_res("http://ip-api.com/json/?lang=zh-CN", proxies)
+                res = requests_res("http://119.28.49.98/", proxies)
                 print("正常状态 {}：".format(i),json.loads(res).get('query'), json.loads(res).get('country'), json.loads(res).get('regionName'))
 
             if get_dnspod_ip('2021214.xyz','smart-node')=='node-cm.2021214.xyz.':
