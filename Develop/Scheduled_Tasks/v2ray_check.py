@@ -27,9 +27,9 @@ def requests_res(url,proxies):
     }
     # requests 设置最多5次超时
     s = requests.Session()
-    s.mount('http://', HTTPAdapter(max_retries=2))
-    s.mount('https://', HTTPAdapter(max_retries=2))
-    response = s.get(url,headers=headers, proxies=proxies, timeout=15)
+    s.mount('http://', HTTPAdapter(max_retries=1))
+    s.mount('https://', HTTPAdapter(max_retries=1))
+    response = s.get(url,headers=headers, proxies=proxies, timeout=10)
     response .encoding = response .apparent_encoding
     html = response.text
     return html
