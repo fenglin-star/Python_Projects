@@ -37,24 +37,25 @@ def requests_res(url,proxies):
 
 
 def post_telegrambot(text):
-    # 如果遇到错误就重试5次
+    # 如果遇到错误就出试5次
     success_num = 0
     while success_num < 5:
         try:
-            post_data = {"token": '202014xyz',"text": text}
-            # requests 设置最多2次超时
+            headers = {
+                "user-agent": random.choice(fake_UserAgent)
+            }
+            # requests 设置最多5次超时
             s = requests.Session()
-            s.mount('http://', HTTPAdapter(max_retries=3))
-            s.mount('https://', HTTPAdapter(max_retries=3))
-            res = s.post(
-                url="https://hk-api.202014.xyz/telegrambot",
-                data=post_data,timeout=25,)
-            data_txt = res.text
-            return data_txt
-
+            s.mount('http://', HTTPAdapter(max_retries=5))
+            s.mount('https://', HTTPAdapter(max_retries=5))
+            response = s.get(url='http://eheh.org/push?account=56991135:59596197c0661036061fdae9dde84689c37e&descr={}'.format(text), headers=headers,timeout=25)
+            response.encoding = response.apparent_encoding
+            html = response.text
+            return html + "  内容：{}".format(text)
+            break
 
         except Exception as e:
-            print("正在重试:",e)
+            print("正在重试:", e)
             success_num = success_num + 1
             continue
 
@@ -107,7 +108,6 @@ def modify_dnspod_ip(domain,record_id,sub_domain,value,record_type='CNAME'):
 
 
 if __name__ == '__main__':
-
     success_num = 0
     while success_num < 6:
         try:
