@@ -116,8 +116,11 @@ if __name__ == '__main__':
                     "http": "socks5://127.0.0.2:20808",
                     'https': 'socks5://127.0.0.2:20808'
                 }
-                res = requests_res("http://119.28.49.98/", proxies)
+                res = requests_res("http://ip-api.com/json/?lang=zh-CN", proxies)
                 print("正常状态 {}：".format(i),json.loads(res).get('query'), json.loads(res).get('country'), json.loads(res).get('regionName'))
+
+                # res = requests_res("http://119.28.49.98/", proxies)
+                # print("正常状态 {}：".format(i),res)
 
             if get_dnspod_ip('2021214.xyz','smart-node')=='node-cm.2021214.xyz.':
                 print("正常状态，无需更改")
@@ -126,6 +129,8 @@ if __name__ == '__main__':
                                  value='node-cm.2021214.xyz',record_type='CNAME')
                 modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
                                  value='node-cm.2021214.xyz', record_type='CNAME')
+                title = 'V2ray已修复，调整为node-cm.2021214.xyz'
+                print(title, success_num, post_telegrambot(text=title))
             break
 
         except Exception as e:
@@ -136,9 +141,12 @@ if __name__ == '__main__':
 
     if success_num >= 3:
         title = 'V2ray存在问题'
-        print(title,success_num, post_telegrambot(text=title))
-        modify_dnspod_ip(domain='2021214.xyz', record_id='758263007', sub_domain='smart-node',
-                         value='node-hk.2021214.xyz', record_type='CNAME')
+        if get_dnspod_ip('2021214.xyz', 'smart-node') == 'node-hk.2021214.xyz.':
+            print("正常状态，无需更改")
+        else:
+            print(title, success_num, post_telegrambot(text=title))
+            modify_dnspod_ip(domain='2021214.xyz', record_id='758263007', sub_domain='smart-node',
+                             value='node-hk.2021214.xyz', record_type='CNAME')
 
-        modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
-                         value='node-hk.2021214.xyz', record_type='CNAME')
+            modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
+                             value='node-hk.2021214.xyz', record_type='CNAME')

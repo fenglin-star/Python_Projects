@@ -53,7 +53,7 @@ class MySQLCommand(object):
             return 1
 
 
-    # 插入数据，插入之前先查询是否存在，如果存在就不再插入
+    # 插入数据，插入之前先查询是否存在，如果存在就不再插入ds
     def insertData(self, my_dict,key):
         table = self.table  # 要操作的表格
         try:

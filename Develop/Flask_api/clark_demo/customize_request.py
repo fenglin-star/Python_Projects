@@ -83,6 +83,8 @@ def requests_res(url,proxies):
             success_num = success_num + 1
             continue
 
+
+
 def requests_img(url,proxies):
     # 如果遇到错误就出试5次
     success_num = 0

@@ -124,7 +124,7 @@ def send_usermail(title,mail_content,send_mail):
     success_num = 0
     while success_num < 5:
         try:
-            sender = MailSender("mail@jingjiniao.info", "202014xyZ", "mail.jingjiniao.info", 25)
+            sender = MailSender("notice@jingjiniao.info", "202014xyZ", "mail.jingjiniao.info", 25)
             sender.send(send_mail, title, mail_content, "html")
             return title + send_mail
             break
