@@ -41,17 +41,14 @@ def post_telegrambot(text):
     success_num = 0
     while success_num < 5:
         try:
-            headers = {
-                "user-agent": random.choice(fake_UserAgent)
-            }
             # requests 设置最多5次超时
             s = requests.Session()
             s.mount('http://', HTTPAdapter(max_retries=5))
             s.mount('https://', HTTPAdapter(max_retries=5))
-            response = s.get(url='http://eheh.org/push?account=56991135:59596197c0661036061fdae9dde84689c37e&descr={}'.format(text), headers=headers,timeout=25)
+            response = s.get(url='https://eheh.org/push?account=42961135:12266197c0661036061fdae9dde84689c37e&descr={}'.format(text),timeout=25)
             response.encoding = response.apparent_encoding
             html = response.text
-            return html + "  内容：{}".format(text)
+            return html + " 内容：{}".format(text)
             break
 
         except Exception as e:
@@ -122,13 +119,15 @@ if __name__ == '__main__':
                 # res = requests_res("http://119.28.49.98/", proxies)
                 # print("正常状态 {}：".format(i),res)
 
-            if get_dnspod_ip('2021214.xyz','smart-node')=='node-cm.2021214.xyz.':
-                print("正常状态，无需更改")
+            if get_dnspod_ip('2021214.xyz','fz')=='node-cm.2021214.xyz.':
+                print("node-cm.2021214.xyz 正常状态，无需更改")
             else:
-                modify_dnspod_ip(domain='2021214.xyz',record_id='758263007',sub_domain='smart-node',
+                modify_dnspod_ip(domain='2021214.xyz',record_id='782528834',sub_domain='fz',
                                  value='node-cm.2021214.xyz',record_type='CNAME')
-                modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
-                                 value='node-cm.2021214.xyz', record_type='CNAME')
+
+                # modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
+                #                  value='node-cm.2021214.xyz', record_type='CNAME')
+
                 title = 'V2ray已修复，调整为node-cm.2021214.xyz'
                 print(title, success_num, post_telegrambot(text=title))
             break
@@ -141,12 +140,12 @@ if __name__ == '__main__':
 
     if success_num >= 3:
         title = 'V2ray存在问题'
-        if get_dnspod_ip('2021214.xyz', 'smart-node') == 'node-hk.2021214.xyz.':
-            print("正常状态，无需更改")
+        if get_dnspod_ip('2021214.xyz', 'fz') == 'node-hk.2021214.xyz.':
+            print("node-hk.2021214.xyz 正常状态，无需更改")
         else:
             print(title, success_num, post_telegrambot(text=title))
-            modify_dnspod_ip(domain='2021214.xyz', record_id='758263007', sub_domain='smart-node',
+            modify_dnspod_ip(domain='2021214.xyz', record_id='782528834', sub_domain='fz',
                              value='node-hk.2021214.xyz', record_type='CNAME')
 
-            modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
-                             value='node-hk.2021214.xyz', record_type='CNAME')
+            # modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
+            #                  value='node-hk.2021214.xyz', record_type='CNAME')

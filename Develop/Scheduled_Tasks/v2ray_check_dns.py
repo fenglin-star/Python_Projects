@@ -57,6 +57,23 @@ def post_telegrambot(text):
             continue
 
 
+def get_dnspod_dns(domain):
+    post_data = {
+        "login_token": "216027,1406d367543fef1e471b78d894b379c2",
+        "format": "json",
+        "domain":domain,
+    }
+    # requests 设置最多五次超时
+    s = requests.Session()
+    s.mount('http://', HTTPAdapter(max_retries=3))
+    s.mount('https://', HTTPAdapter(max_retries=3))
+    res = s.post(
+        url="https://dnsapi.cn/Record.List",  # 翻译
+        data=post_data,timeout=20,)
+    data_txt = res.text
+    return data_txt
+
+
 
 def get_dnspod_ip(domain,name):
     post_data = {
@@ -72,6 +89,7 @@ def get_dnspod_ip(domain,name):
         url="https://dnsapi.cn/Record.List",  # 翻译
         data=post_data,timeout=20,)
     data_txt = json.loads(res.text)['records']
+
     for i in data_txt:
         if i['name'] == name:
             print('域名{}：'.format(domain),i['name'],i['value'],'id为:',i['id'],'line为:',i['line'])
@@ -105,18 +123,21 @@ def modify_dnspod_ip(domain,record_id,sub_domain,value,record_type='CNAME'):
 
 
 if __name__ == '__main__':
+    print(get_dnspod_dns(domain='2021214.xyz'))
 
     # domain='2021214.xyz'
     # record_id='758263007'
     # sub_domain='smart-node'
     # value='node-cm.2021214.xyz'
     # modify_dnspod_ip(domain,record_id, sub_domain, value, record_type='CNAME')
-    modify_dnspod_ip(domain='2021214.xyz', record_id='758263007', sub_domain='smart-node',
-                     value='node-cm.2021214.xyz', record_type='CNAME')
 
-    modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
-                     value='node-cm.2021214.xyz', record_type='CNAME')
 
-    print(get_dnspod_ip('202014.xyz','node'))
-
-    print(get_dnspod_ip('2021214.xyz','smart-node'))
+    # modify_dnspod_ip(domain='2021214.xyz', record_id='758263007', sub_domain='smart-node',
+    #                  value='node-cm.2021214.xyz', record_type='CNAME')
+    #
+    # modify_dnspod_ip(domain='202014.xyz', record_id='737826514', sub_domain='node',
+    #                  value='node-cm.2021214.xyz', record_type='CNAME')
+    #
+    # print(get_dnspod_ip('202014.xyz','node'))
+    #
+    # print(get_dnspod_ip('2021214.xyz','smart-node'))
