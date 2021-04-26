@@ -30,7 +30,7 @@ def requests_res(url,proxies):
     s.mount('http://', HTTPAdapter(max_retries=1))
     s.mount('https://', HTTPAdapter(max_retries=1))
     response = s.get(url,headers=headers, proxies=proxies, timeout=10)
-    response .encoding = response .apparent_encoding
+    response.encoding = response.apparent_encoding
     html = response.text
     return html
 
