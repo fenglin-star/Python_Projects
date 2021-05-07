@@ -123,13 +123,16 @@ def modify_dnspod_ip(domain,record_id,sub_domain,value,record_type='CNAME'):
 
 
 if __name__ == '__main__':
-    print(get_dnspod_dns(domain='2021214.xyz'))
+    domain='2021214.xyz'
+    record_id='761863200'
+    sub_domain='node-cm'
+    value='node-hk.2021214.xyz'
 
-    # domain='2021214.xyz'
-    # record_id='758263007'
-    # sub_domain='smart-node'
-    # value='node-cm.2021214.xyz'
-    # modify_dnspod_ip(domain,record_id, sub_domain, value, record_type='CNAME')
+    # get_dnspod_dns(domain) #全部子域名的记录
+
+    get_dnspod_ip(domain, name='node-cu')  #查询子域名对应的ID
+
+    # modify_dnspod_ip(domain='2021214.xyz',record_id='761863200', sub_domain='node-cm', value='node-hk.2021214.xyz', record_type='CNAME')
 
 
     # modify_dnspod_ip(domain='2021214.xyz', record_id='758263007', sub_domain='smart-node',
