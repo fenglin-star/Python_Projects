@@ -129,7 +129,7 @@ if __name__ == '__main__':
 
 
     if requests_res(natcu_url) == 530:
-        print("{} 检测合格".format(nodehk_url))
+        print("{} 检测合格".format(natcu_url))
         if get_dnspod_ip('2021214.xyz', 'node-cu') == 'nat-cu.2021214.xyz.':
             print("node-cm.2021214.xyz 正常状态，无需更改")
         else:
@@ -142,7 +142,7 @@ if __name__ == '__main__':
 
 
     if requests_res(natcm_url) == 530:
-        print("{} 检测合格".format(nodehk_url))
+        print("{} 检测合格".format(natcm_url))
         if get_dnspod_ip('2021214.xyz', 'node-cm') == 'nat-cm.2021214.xyz.':
             print("node-cm.2021214.xyz 正常状态，无需更改")
         else:
