@@ -46,7 +46,7 @@ def requests_res(url):
             s = requests.Session()
             s.mount('http://', HTTPAdapter(max_retries=2))
             s.mount('https://', HTTPAdapter(max_retries=2))
-            response = s.get(url,headers=headers,timeout=15)
+            response = s.get(url,headers=headers,timeout=30)
             # print("检测第{}次  ".format(i),response.status_code,"  ",url)
         return response.status_code
 
