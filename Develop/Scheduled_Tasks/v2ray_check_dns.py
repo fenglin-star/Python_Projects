@@ -130,7 +130,7 @@ if __name__ == '__main__':
 
     # get_dnspod_dns(domain) #全部子域名的记录
 
-    get_dnspod_ip(domain, name='node-cu')  #查询子域名对应的ID
+    get_dnspod_ip(domain, name='node-cm02')  #查询子域名对应的ID
 
     # modify_dnspod_ip(domain='2021214.xyz',record_id='761863200', sub_domain='node-cm', value='node-hk.2021214.xyz', record_type='CNAME')
 

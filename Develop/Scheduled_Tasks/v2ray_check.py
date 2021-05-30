@@ -46,7 +46,7 @@ def requests_res(url):
             s = requests.Session()
             s.mount('http://', HTTPAdapter(max_retries=2))
             s.mount('https://', HTTPAdapter(max_retries=2))
-            response = s.get(url,headers=headers,timeout=30)
+            response = s.get(url,headers=headers,timeout=10)
             # print("检测第{}次  ".format(i),response.status_code,"  ",url)
         return response.status_code
 
@@ -121,6 +121,7 @@ if __name__ == '__main__':
     nodehk_url = 'http://node-hk.2021214.xyz:30345/'
     natcu_url = 'http://nat-cu.2021214.xyz:30345'
     natcm_url = 'http://nat-cm.2021214.xyz:30345/'
+    natcm02_url = 'http://nat-cm02.2021214.xyz:20085/'
 
     if requests_res(nodehk_url) == 530:
         print("{} 检测合格".format(nodehk_url))
@@ -160,3 +161,19 @@ if __name__ == '__main__':
             modify_dnspod_ip(domain='2021214.xyz', record_id='761863200', sub_domain='node-cm', value='node-hk.2021214.xyz',
                              record_type='CNAME')
 
+
+    if requests_res(natcm02_url) == 530:
+        print("{} 检测合格".format(natcm02_url))
+        if get_dnspod_ip('2021214.xyz', 'node-cm02') == 'nat-cm02.2021214.xyz.':
+            pass
+        else:
+            modify_dnspod_ip(domain='2021214.xyz', record_id='822595624', sub_domain='node-cm02',
+                                 value='nat-cm02.2021214.xyz',
+                                 record_type='CNAME')
+    else:
+        if get_dnspod_ip('2021214.xyz', 'node-cm02') == 'node-hk.2021214.xyz.':
+            pass
+        else:
+            # post_telegrambot(text='通道失效：{}'.format(natcm_url))
+            modify_dnspod_ip(domain='2021214.xyz', record_id='822595624', sub_domain='node-cm02', value='node-hk.2021214.xyz',
+                             record_type='CNAME')
