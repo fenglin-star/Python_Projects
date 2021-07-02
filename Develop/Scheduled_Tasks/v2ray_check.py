@@ -13,7 +13,7 @@ fake_UserAgent = [
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; ru-RU) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5",
     "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20130401 Firefox/21.0",
     "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.2117.157 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_6; zh-cn) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27",
+    "Mozilla/5.0 (Macintosh; U; Intel Mac OS X  10_6_6; zh-cn) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27",
 ]
 
 def post_telegrambot(text):
@@ -129,20 +129,20 @@ if __name__ == '__main__':
         post_telegrambot(text='通道失效：{}'.format(nodehk_url))
 
 
-    if requests_res(natcu_url) == 530:
-        print("{} 检测合格".format(natcu_url))
-        if get_dnspod_ip('2021214.xyz', 'node-cu') == 'nat-cu.2021214.xyz.':
-            pass
-        else:
-            modify_dnspod_ip(domain='2021214.xyz', record_id='775458109', sub_domain='node-cu', value='nat-cu.2021214.xyz',
-                     record_type='CNAME')
-    else:
-        if get_dnspod_ip('2021214.xyz', 'node-cu') == 'node-hk.2021214.xyz.':
-            pass
-        else:
-            # post_telegrambot(text='通道失效：{}'.format(natcu_url))
-            modify_dnspod_ip(domain='2021214.xyz', record_id='775458109', sub_domain='node-cm', value='node-hk.2021214.xyz',
-                             record_type='CNAME')
+    # if requests_res(natcu_url) == 530:
+    #     print("{} 检测合格".format(natcu_url))
+    #     if get_dnspod_ip('2021214.xyz', 'node-cu') == 'nat-cu.2021214.xyz.':
+    #         pass
+    #     else:
+    #         modify_dnspod_ip(domain='2021214.xyz', record_id='775458109', sub_domain='node-cu', value='nat-cu.2021214.xyz',
+    #                  record_type='CNAME')
+    # else:
+    #     if get_dnspod_ip('2021214.xyz', 'node-cu') == 'node-hk.2021214.xyz.':
+    #         pass
+    #     else:
+    #         # post_telegrambot(text='通道失效：{}'.format(natcu_url))
+    #         modify_dnspod_ip(domain='2021214.xyz', record_id='775458109', sub_domain='node-cm', value='node-hk.2021214.xyz',
+    #                          record_type='CNAME')
 
 
     if requests_res(natcm_url) == 530:
@@ -157,7 +157,7 @@ if __name__ == '__main__':
         if get_dnspod_ip('2021214.xyz', 'node-cm') == 'node-hk.2021214.xyz.':
             pass
         else:
-            # post_telegrambot(text='通道失效：{}'.format(natcm_url))
+            post_telegrambot(text='通道失效：{}'.format(natcm_url))
             modify_dnspod_ip(domain='2021214.xyz', record_id='761863200', sub_domain='node-cm', value='node-hk.2021214.xyz',
                              record_type='CNAME')
 
@@ -174,6 +174,6 @@ if __name__ == '__main__':
         if get_dnspod_ip('2021214.xyz', 'node-cm02') == 'node-hk.2021214.xyz.':
             pass
         else:
-            # post_telegrambot(text='通道失效：{}'.format(natcm_url))
+            post_telegrambot(text='通道失效：{}'.format(natcm_url))
             modify_dnspod_ip(domain='2021214.xyz', record_id='822595624', sub_domain='node-cm02', value='node-hk.2021214.xyz',
                              record_type='CNAME')
