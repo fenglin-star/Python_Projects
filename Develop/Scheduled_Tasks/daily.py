@@ -145,57 +145,8 @@ def get_cf_ip():
     return new_ip
 
 
+
 if __name__ == '__main__':
-    nodehk_url = 'http://node-hk.2021214.xyz:30345/'
-    natcm_url = 'http://nat-cm.2021214.xyz:30345/'
-    natcm02_url = 'http://nat-cm02.2021214.xyz:20085/'
-    cf_url = 'http://cfyes.2021214.xyz:8880'
-
-    if requests_res(cf_url) == 530:
-        print("{} 检测合格".format(cf_url))
-    else:
-        modify_dnspod_ip(domain='2021214.xyz', record_id='846237677', sub_domain='cfyes',
-                         value=get_cf_ip(),
-                         record_type='A')
-        post_telegrambot(text='通道失效：{}'.format(cf_url))
-
-
-    if requests_res(nodehk_url) == 530:
-        print("{} 检测合格".format(nodehk_url))
-    else:
-        post_telegrambot(text='通道失效：{}'.format(nodehk_url))
-
-
-    if requests_res(natcm_url) == 530:
-        print("{} 检测合格".format(natcm_url))
-        if get_dnspod_ip('2021214.xyz', 'node-cm') == 'nat-cm.2021214.xyz.':
-            pass
-        else:
-            modify_dnspod_ip(domain='2021214.xyz', record_id='761863200', sub_domain='node-cm',
-                                 value='nat-cm.2021214.xyz',
-                                 record_type='CNAME')
-
-    else:
-        if get_dnspod_ip('2021214.xyz', 'node-cm') == 'node-hk.2021214.xyz.':
-            pass
-        else:
-            post_telegrambot(text='通道失效：{}'.format(natcm_url))
-            modify_dnspod_ip(domain='2021214.xyz', record_id='761863200', sub_domain='node-cm', value='node-hk.2021214.xyz',
-                             record_type='CNAME')
-
-
-    if requests_res(natcm02_url) == 530:
-        print("{} 检测合格".format(natcm02_url))
-        if get_dnspod_ip('2021214.xyz', 'node-cm02') == 'nat-cm02.2021214.xyz.':
-            pass
-        else:
-            modify_dnspod_ip(domain='2021214.xyz', record_id='822595624', sub_domain='node-cm02',
-                                 value='nat-cm02.2021214.xyz',
-                                 record_type='CNAME')
-    else:
-        if get_dnspod_ip('2021214.xyz', 'node-cm02') == 'node-hk.2021214.xyz.':
-            pass
-        else:
-            post_telegrambot(text='通道失效：{}'.format(natcm_url))
-            modify_dnspod_ip(domain='2021214.xyz', record_id='822595624', sub_domain='node-cm02', value='node-hk.2021214.xyz',
-                             record_type='CNAME')
+    modify_dnspod_ip(domain='2021214.xyz', record_id='846237677', sub_domain='cfyes',
+                     value=get_cf_ip(),
+                     record_type='A')
