@@ -141,6 +141,7 @@ def get_cf_ip():
     data = json.dumps(payload)
     url = 'https://api.hostmonit.com/get_optimization_ip'
     res = requests.post(url, data=data, headers=header)
+    print(json.loads(res.text).get('info')[0])
     new_ip = json.loads(res.text).get('info')[0].get('ip')
     return new_ip
 
